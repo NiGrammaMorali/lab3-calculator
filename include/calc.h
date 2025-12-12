@@ -2,12 +2,14 @@
 #include "stack.h"
 #include <map>
 #include <vector>
+#include <cmath>
+#include <string>
 
 class ArithmExpression {
 private:
 	string infix;
-	string postfix;
-	vector<char> lexems;
+	vector<string> postfix;
+	vector<string> lexems;
 	map<char, double> operands;
 	int GetPriority(char item);
 	void Parse();
@@ -16,7 +18,7 @@ public:
 	ArithmExpression();
 	ArithmExpression(string inf);
 	string GetInfix();
-	string GetPostfix();
+	void GetPostfix();
 	double Calculate(const map<char, double>& values);
 	vector<char> GetOperands() const;
 };
