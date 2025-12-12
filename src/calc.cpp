@@ -126,8 +126,28 @@ void ArithmExpression::ToPostfix() {
 				Stack.Pop();
 			}
 			break;
-		case('+'):
 		case('-'):
+			if (Stack.IsEmpty()) {
+				Stack.Push('0');
+			}
+			else if (Stack.Top() == '(') {
+				Stack.Push('0');
+			}
+			while (!Stack.IsEmpty()) {
+				StackItem = Stack.Top();
+				Stack.Pop();
+				if (GetPriority(item) <= GetPriority(StackItem)) {
+					tmp = StackItem;
+					postfix.push_back(tmp);
+				}
+				else {
+					Stack.Push(StackItem);
+					break;
+				}
+			}
+			Stack.Push(item);
+			break;
+		case('+'):
 		case('*'):
 		case('/'):
 		case('"'):
