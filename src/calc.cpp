@@ -70,6 +70,7 @@ int ArithmExpression::GetPriority(char item) {
 	case('"'):
 	case('#'):
 	case('$'):
+	case('^'):
 		return 3;
 	case('+'):
 	case('-'):
@@ -132,6 +133,7 @@ void ArithmExpression::ToPostfix() {
 		case('"'):
 		case('#'):
 		case('$'):
+		case('^'):
 			while (!Stack.IsEmpty()) {
 				StackItem = Stack.Top();
 				Stack.Pop();
@@ -239,6 +241,13 @@ double ArithmExpression::Calculate(const map<char, double>& values) {
 				Stack.Pop();
 				LeftOperand = log2(LeftOperand);
 				Stack.Push(LeftOperand);
+				break;
+			case('^'):
+				RightOperand = Stack.Top();
+				Stack.Pop();
+				LeftOperand = Stack.Top();
+				Stack.Pop();
+				Stack.Push(pow(LeftOperand, RightOperand));
 				break;
 			default:
 				Stack.Push(operands[item]);
