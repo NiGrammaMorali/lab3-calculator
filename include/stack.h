@@ -41,7 +41,7 @@ public:
 		}
 		return pMem[top];
 	}
-	T Peek(T val) {
+	T& Peek(size_t val) const {
 		if (val > top || val < 0) {
 			throw out_of_range("The index is out of range");
 		}
@@ -57,8 +57,10 @@ public:
 		return (top == size - 1);
 	}
 	friend ostream& operator<<(ostream& ostr, const DynamicStack& S) {
-		for (size_t i = 0; i <= S.top; i++) {
-			ostr << S.Peek(i);
+		size_t size = S.top;
+		for (size_t i = 0; i <= size; i++) {
+			T tmp = S.Peek(i);
+			ostr << tmp;
 		}
 		return ostr;
 	}
