@@ -81,6 +81,8 @@ int ArithmExpression::GetPriority(char item) {
 	case('('):
 	case(')'):
 		return -1;
+	default:
+		return 10;
 	}
 }
 void ArithmExpression::ToPostfix() {
@@ -88,6 +90,7 @@ void ArithmExpression::ToPostfix() {
 	DynamicStack<char> Stack;
 	char StackItem;
 	string tmp;
+	char last_lex;
 	for (string lexem : lexems) {
 		char item;
 		if (lexem == "sin") {
@@ -130,7 +133,7 @@ void ArithmExpression::ToPostfix() {
 			if (Stack.IsEmpty()) {
 				Stack.Push('0');
 			}
-			else if (Stack.Top() == '(') {
+			else if (last_lex == '(') {
 				Stack.Push('0');
 			}
 			while (!Stack.IsEmpty()) {
@@ -172,6 +175,7 @@ void ArithmExpression::ToPostfix() {
 			operands.insert({ item, 0.0 });
 			postfix.push_back(lexem);
 		}
+		last_lex = item;
 		
 	}
 	while (!Stack.IsEmpty()) {
