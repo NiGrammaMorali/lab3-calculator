@@ -7,6 +7,7 @@
 
 class ArithmExpression {
 private:
+	bool correct;
 	string infix;
 	vector<string> postfix;
 	vector<string> lexems;
@@ -18,7 +19,7 @@ public:
 	ArithmExpression();
 	ArithmExpression(string inf);
 	string GetInfix();
-	void GetPostfix();
+	string GetPostfix();
 	double Calculate(const map<char, double>& values);
 	vector<char> GetOperands() const;
 };

@@ -4,10 +4,6 @@
 TEST(DynamicStack, CanMakeStack) {
 	ASSERT_NO_THROW(DynamicStack<int> S);
 }
-TEST(DynamicStack, CantPeekIntoEmptyStack) {
-	DynamicStack<int> S;
-	ASSERT_ANY_THROW(S.Peek(0));
-}
 TEST(DynamicStack, CantReturnTheTopOfAnEmptyStack) {
 	DynamicStack<int> S;
 	ASSERT_ANY_THROW(S.Top());
@@ -35,12 +31,4 @@ TEST(DynamicStack, StackCanDynamicallyIncreaseItsSize) {
 TEST(DynamicStack, CantPopTheEmptyStack) {
 	DynamicStack<int> S;
 	ASSERT_ANY_THROW(S.Pop());
-}
-TEST(DynamicStack, CanPeekIntoTheGivenPoint) {
-	DynamicStack<int> S(4);
-	S.Push(3);
-	S.Push(4);
-	S.Push(5);
-	S.Push(6);
-	ASSERT_EQ(4, S.Peek(1));
 }
